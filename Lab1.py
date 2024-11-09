@@ -1,4 +1,7 @@
 import random
+import copy
+from turtledemo.penrose import start
+
 
 class Node:
     def __init__(self, data):
@@ -49,11 +52,7 @@ class Stack:
         return data
 
     def isempty(self):  # check if the list is empty
-        answer = self.__linkedlist.getfirstinlist()
-        if answer is None:
-            return True
-        else:
-            return False
+        return self.__linkedlist.getfirstinlist() is None
 
 def createfullstack(size, topvalue):
     stack = Stack()
@@ -70,21 +69,31 @@ def createorderstack(size):
 def sortstacklowestontop(stack):
     sortedstack = Stack()
     lowvalue = stack.pop()
+    print("banana",lowvalue)
     highvalue = stack.pop()
-    while not stack.isempty():
-
-        while highvalue > lowvalue:             #if highvalue is greater than bottom then
+    print("apple", highvalue)
+    while stack.isempty() is False:
+        print("orange")
+        while highvalue is not None and lowvalue is not None and highvalue > lowvalue:             #if highvalue is greater than bottom then
+            print("grape")
             sortedstack.push(highvalue)         #it gets pushed into the sortedstack
             highvalue = lowvalue                #the old lowvalue is now high value
             lowvalue = stack.pop()              #and we retrive a new lowvalue
-
-        stack.push(highvalue)                   #when the while statement is no longer true,
-        highvalue = sortedstack.pop()           #the old highvalue get pushed to the unsorded stack
-                                                #and we retrive a newhighvalue, then the whileloop is tested again
+            print(lowvalue, highvalue)
+        print("lemon")
+        if sortedstack.isempty():
+            stack.push(highvalue)
+            highvalue = lowvalue
+            lowvalue = stack.pop()
+        else:
+            stack.push(highvalue)                   #when the while statement is no longer true,
+            highvalue = sortedstack.pop()           #the old highvalue get pushed to the unsorded stack
+                                                    #and we retrive a newhighvalue, then the whileloop is tested again
     return sortedstack
 
 def main():
     start = createorderstack(10)
+
     result = sortstacklowestontop(start)
     for i in range (0,10):
         print(result.pop())
