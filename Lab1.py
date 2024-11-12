@@ -1,5 +1,6 @@
 import random
 import copy
+from inspect import stack
 from turtledemo.penrose import start
 
 
@@ -67,6 +68,7 @@ def createorderstack(size):
     return stack
 
 def sortStackLowestOnTop(stack):
+    unsortedStack = stack
     sortedStack = Stack()
     lowValue = stack.pop()
 
@@ -74,35 +76,38 @@ def sortStackLowestOnTop(stack):
     highValue = stack.pop()
     print("apple", highValue)
 
-    while stack.isempty() is False:
+    while unsortedStack.isempty() is False:
         print("orange")
 
-        while (highValue is not None) and (lowValue is not None) and (highValue > lowValue):             #if highValue is greater than bottom then
+        while (highValue is not None) and (lowValue is not None) and (highValue >= lowValue):             #if highValue is greater than bottom then
             print("grape")
             sortedStack.push(highValue)         #it gets pushed into the sortedStack
             highValue = lowValue                #the old lowValue is now high value
-            lowValue = stack.pop()              #and we retrive a new lowValue
+            lowValue = unsortedStack.pop()              #and we retrive a new lowValue
             print(lowValue, highValue)
 
         print("lemon")
         if sortedStack.isempty():
-            stack.push(highValue)
+            unsortedStack.push(highValue)
             highValue = lowValue
-            lowValue = stack.pop()
-        else:
-            stack.push(highValue)                   #when the while statement is no longer true,
+            lowValue = unsortedStack.pop()
+        elif unsortedStack.isempty() is False:
+            unsortedStack.push(highValue)                   #when the while statement is no longer true,
             highValue = sortedStack.pop()           #the old highValue get pushed to the unsorded stack
                                                     #and we retrive a newhighValue, then the whileloop is tested again
-        print(stack.isempty())
+        print(unsortedStack.isempty())
 
     return sortedStack
 
 def main():
-    start = createorderstack(10)
+    #start = createorderstack(100)
+    start = createfullstack(100,40)
 
     result = sortStackLowestOnTop(start)
-    print(result)
+    for i in range(0,100):
+        print(result.pop())
+
+
 
 main()
 
-#Test commit :D
