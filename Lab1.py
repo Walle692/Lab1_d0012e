@@ -66,37 +66,42 @@ def createorderstack(size):
         stack.push(i)
     return stack
 
-def sortstacklowestontop(stack):
-    sortedstack = Stack()
-    lowvalue = stack.pop()
-    print("banana",lowvalue)
-    highvalue = stack.pop()
-    print("apple", highvalue)
+def sortStackLowestOnTop(stack):
+    sortedStack = Stack()
+    lowValue = stack.pop()
+
+    print("banana",lowValue)
+    highValue = stack.pop()
+    print("apple", highValue)
+
     while stack.isempty() is False:
         print("orange")
-        while highvalue is not None and lowvalue is not None and highvalue > lowvalue:             #if highvalue is greater than bottom then
+
+        while (highValue is not None) and (lowValue is not None) and (highValue > lowValue):             #if highValue is greater than bottom then
             print("grape")
-            sortedstack.push(highvalue)         #it gets pushed into the sortedstack
-            highvalue = lowvalue                #the old lowvalue is now high value
-            lowvalue = stack.pop()              #and we retrive a new lowvalue
-            print(lowvalue, highvalue)
+            sortedStack.push(highValue)         #it gets pushed into the sortedStack
+            highValue = lowValue                #the old lowValue is now high value
+            lowValue = stack.pop()              #and we retrive a new lowValue
+            print(lowValue, highValue)
+
         print("lemon")
-        if sortedstack.isempty():
-            stack.push(highvalue)
-            highvalue = lowvalue
-            lowvalue = stack.pop()
+        if sortedStack.isempty():
+            stack.push(highValue)
+            highValue = lowValue
+            lowValue = stack.pop()
         else:
-            stack.push(highvalue)                   #when the while statement is no longer true,
-            highvalue = sortedstack.pop()           #the old highvalue get pushed to the unsorded stack
-                                                    #and we retrive a newhighvalue, then the whileloop is tested again
-    return sortedstack
+            stack.push(highValue)                   #when the while statement is no longer true,
+            highValue = sortedStack.pop()           #the old highValue get pushed to the unsorded stack
+                                                    #and we retrive a newhighValue, then the whileloop is tested again
+        print(stack.isempty())
+
+    return sortedStack
 
 def main():
     start = createorderstack(10)
 
-    result = sortstacklowestontop(start)
-    for i in range (0,10):
-        print(result.pop())
+    result = sortStackLowestOnTop(start)
+    print(result)
 
 main()
 
