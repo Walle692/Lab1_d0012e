@@ -1,7 +1,6 @@
 import random
 import copy
-from inspect import stack
-from turtledemo.penrose import start
+import time
 
 
 class Node:
@@ -102,8 +101,11 @@ def sortStackLowestOnTop(stack):
 def main():
     #start = createorderstack(100)
     start = createfullstack(100,40)
-
+    starttime = time.time()
     result = sortStackLowestOnTop(start)
+    endtime = time.time()
+    runtime = endtime - starttime
+    print(runtime)
     for i in range(0,100):
         print(result.pop())
 
