@@ -1,5 +1,4 @@
 import random
-import copy
 import time
 
 
@@ -100,14 +99,14 @@ def sortStackLowestOnTop(stack):
 
 def main():
     #start = createorderstack(100)
-    start = createfullstack(100,40)
+    start = createfullstack(10,40)
     starttime = time.time()
     result = sortStackLowestOnTop(start)
     endtime = time.time()
     runtime = endtime - starttime
-    print(runtime)
-    for i in range(0,100):
+    for i in range(1,10):
         print(result.pop())
+    print(runtime)
 
 
 
