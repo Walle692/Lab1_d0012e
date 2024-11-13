@@ -53,58 +53,81 @@ class Stack:
     def isempty(self):  # check if the list is empty
         return self.__linkedlist.getfirstinlist() is None
 
-def createfullstack(size, topvalue):
+def createfullstack(size, topvalue): # creates a stack that is of size with values between 1 and topvalue
     stack = Stack()
     for i in range(1,size+1):
         stack.push(random.randint(1,topvalue))
     return stack
 
-def createorderstack(size):
+def createorderstack(size): #creates a stack that is sorted smallest to largest
     stack = Stack()
     for i in range(1,size+1):
         stack.push(i)
     return stack
 
+def createworststack(size): #creates a stack that is sorted largest to smallest
+    stack = Stack()
+    for i in range(size,0,-1):
+        stack.push(i)
+    return stack
+
 def sortStackLowestOnTop(stack):
+    #giving reasonable names and initializeing empty stack to sort to
     unsortedStack = stack
     sortedStack = Stack()
-    lowValue = stack.pop()
 
-    print("banana",lowValue)
-    highValue = stack.pop()
-    print("apple", highValue)
+    #checking if the unsortedstack is empty
+    #if the stack is empty it returns an empty stack
+    if not stack.isempty():
+        lowValue = stack.pop()                      #if the stack has elements get a lowValue
+        if not stack.isempty():                     #check if stack is empty again if not gets a highValue
+            highValue = stack.pop()
+        else:
+            sortedStack.push(lowValue)              #if there was only one value, return sortedStack with that value
+            return sortedStack
+    else:
+        return sortedStack
 
-    while unsortedStack.isempty() is False:
-        print("orange")
+
+
+    while (unsortedStack.isempty() is False) and (highValue is not None) and (lowValue is not None):
 
         while (highValue is not None) and (lowValue is not None) and (highValue >= lowValue):             #if highValue is greater than bottom then
-            print("grape")
-            sortedStack.push(highValue)         #it gets pushed into the sortedStack
-            highValue = lowValue                #the old lowValue is now high value
-            lowValue = unsortedStack.pop()              #and we retrive a new lowValue
-            print(lowValue, highValue)
+            sortedStack.push(highValue)             #it gets pushed into the sortedStack
+            highValue = lowValue                    #the old lowValue is now high value
+            if not unsortedStack.isempty():         #check if we actually can get a new value
+                lowValue = unsortedStack.pop()      #get new value
+            else:
+                lowValue = None                     #importand to close loop
 
-        print("lemon")
         if sortedStack.isempty():
             unsortedStack.push(highValue)
             highValue = lowValue
-            lowValue = unsortedStack.pop()
-        elif unsortedStack.isempty() is False:
-            unsortedStack.push(highValue)                   #when the while statement is no longer true,
-            highValue = sortedStack.pop()           #the old highValue get pushed to the unsorded stack
-                                                    #and we retrive a newhighValue, then the whileloop is tested again
-        print(unsortedStack.isempty())
+            if not unsortedStack.isempty():         #check if we actually can get a new value
+                lowValue = unsortedStack.pop()
+            else:
+                lowValue = None                     #importand to close loop
+        else:
+            unsortedStack.push(highValue)
+            highValue = sortedStack.pop()
+            print(highValue,lowValue)
+
+
+
+    if lowValue is not None:
+        sortedStack.push(lowValue)
+    if highValue is not None:
+        sortedStack.push(highValue)
 
     return sortedStack
 
 def main():
-    #start = createorderstack(100)
-    start = createfullstack(10,40)
+    start = createworststack(1000)
     starttime = time.time()
     result = sortStackLowestOnTop(start)
     endtime = time.time()
     runtime = endtime - starttime
-    for i in range(1,10):
+    for i in range(0,1000):
         print(result.pop())
     print(runtime)
 
