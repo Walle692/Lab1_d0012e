@@ -79,19 +79,21 @@ def sortStackLowestOnTop(stack):
     #checking if the unsortedstack is empty
     #if the stack is empty it returns an empty stack
     if not stack.isempty():
-        lowValue = stack.pop()                      #if the stack has elements get a lowValue
+        highValue = stack.pop()                      #if the stack has elements get a lowValue
         if not stack.isempty():                     #check if stack is empty again if not gets a highValue
-            highValue = stack.pop()
+            lowValue = stack.pop()
         else:
-            sortedStack.push(lowValue)              #if there was only one value, return sortedStack with that value
+            sortedStack.push(highValue)              #if there was only one value, return sortedStack with that value
             return sortedStack
     else:
         return sortedStack
 
 
 
-    while (unsortedStack.isempty() is False) and (highValue is not None) and (lowValue is not None):
-
+    while  (unsortedStack.isempty() is False) and (lowValue is not None) and (highValue is not None):
+        if highValue == 1 or lowValue == 1:
+            print("lowvalue :"+ "highvalue :")
+            print(lowValue,highValue)
         while (highValue is not None) and (lowValue is not None) and (highValue >= lowValue):             #if highValue is greater than bottom then
             sortedStack.push(highValue)             #it gets pushed into the sortedStack
             highValue = lowValue                    #the old lowValue is now high value
@@ -109,8 +111,10 @@ def sortStackLowestOnTop(stack):
                 lowValue = None                     #importand to close loop
         else:
             unsortedStack.push(highValue)
-            highValue = sortedStack.pop()
-            print(highValue,lowValue)
+            if not sortedStack.isempty():
+                highValue = sortedStack.pop()
+            if lowValue is None:
+                print(highValue,lowValue)
 
 
 
