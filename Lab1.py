@@ -114,9 +114,6 @@ def sortStackLowestOnTop(stack):
             if not unsortedStack.isempty():         #check if we actually can get a new value
                 lowValue = unsortedStack.pop()
                 countops += 2
-            else:
-                countops += 1
-                lowValue = None                     #importand to close loop
 
         else:                                       #if the sortedstack has elements this runs instead
             unsortedStack.push(highValue)           #push the highvalue to unsorted
