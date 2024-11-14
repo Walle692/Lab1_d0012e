@@ -127,32 +127,47 @@ def sortStackLowestOnTop(stack):
 
     return sortedStack
 
-def testsort(stack):
+def newsortlowestontop(stack):
+    #giving reasonable names and initializeing empty stack to sort to
+    unsortedStack = stack
     sortedStack = Stack()
-    while not stack.isempty():
-        highvalue = stack.pop()
+
+    #main loop, runs according to conditions, if the stack is empty it will return an empty stack
+    while not unsortedStack.isempty():
+        highvalue = unsortedStack.pop()             #get value for comparison
+
+        #inner loop, the main comparison part
         while not sortedStack.isempty():
-            lowvalue = sortedStack.pop()
-            if (highvalue > lowvalue):
-                stack.push(lowvalue)
+
+            lowvalue = sortedStack.pop()            #get value 2 for comparison
+
+            if (highvalue > lowvalue):              #compare
+                unsortedStack.push(lowvalue)        #if the highvalue was higher push the lowvalue to the unsorted stack
+
             else:
-                sortedStack.push(lowvalue)
-                break
-        sortedStack.push(highvalue)
+                sortedStack.push(lowvalue)          #if the highvalue was lower push the lowvalue to the sorted stack
+                break                               #if that was the case we exit the innerloop so we can get a new highvalue
+
+        sortedStack.push(highvalue)                 #resets the loop so when it starts again(if it does) we have the same start
+
     return sortedStack
 
 
 def main():
-    #start = createworststack(1000)
-    start = createfullstack(1000,10000)
-    starttime = time.time()
-    #result = sortStackLowestOnTop(start)
-    result = testsort(start)
-    endtime = time.time()
-    runtime = endtime - starttime
+    start1 = createworststack(20000)
+    start2 = createworststack(20000)
+    starttime1 = time.time()
+    result1 = newsortlowestontop(start1)
+    endtime1 = time.time()
+    runtime1 = endtime1 - starttime1
+    starttime2 = time.time()
+    result2 = sortStackLowestOnTop(start2)
+    endtime2 = time.time()
+    runtime2 = endtime2 - starttime2
     for i in range(0,1000):
-        print(result.pop())
-    print(runtime)
+        print(result1.pop(), result2.pop())
+    print(runtime1)
+    print(runtime2)
 
 
 
