@@ -127,11 +127,27 @@ def sortStackLowestOnTop(stack):
 
     return sortedStack
 
+def testsort(stack):
+    sortedStack = Stack()
+    while not stack.isempty():
+        highvalue = stack.pop()
+        while not sortedStack.isempty():
+            lowvalue = sortedStack.pop()
+            if (highvalue > lowvalue):
+                stack.push(lowvalue)
+            else:
+                sortedStack.push(lowvalue)
+                break
+        sortedStack.push(highvalue)
+    return sortedStack
+
+
 def main():
     #start = createworststack(1000)
     start = createfullstack(1000,10000)
     starttime = time.time()
-    result = sortStackLowestOnTop(start)
+    #result = sortStackLowestOnTop(start)
+    result = testsort(start)
     endtime = time.time()
     runtime = endtime - starttime
     for i in range(0,1000):
