@@ -114,12 +114,15 @@ def sortStackLowestOnTop(stack):
             if not unsortedStack.isempty():         #check if we actually can get a new value
                 lowValue = unsortedStack.pop()
                 countops += 2
+            # else:
+            #     countops += 1
+            #     lowValue = None                     #importand to close loop
 
         else:                                       #if the sortedstack has elements this runs instead
             unsortedStack.push(highValue)           #push the highvalue to unsorted
             if not sortedStack.isempty():
                 highValue = sortedStack.pop()       #gets a new highvalue
-                countops += 3
+                countops += 4
             if lowValue is None and unsortedStack.isempty() is False:
                 lowValue = unsortedStack.pop()      #this part is for the case when the unsorted stack has elements
                 countops += 2                       #this makes sure that we have both high and lowvalue, when this runs it means that we've
@@ -140,25 +143,34 @@ def newsortlowestontop(stack):
     #giving reasonable names and initializeing empty stack to sort to
     unsortedStack = stack
     sortedStack = Stack()
+    countOps = 0
 
     #main loop, runs according to conditions, if the stack is empty it will return an empty stack
     while not unsortedStack.isempty():
+        countOps += 1
         highvalue = unsortedStack.pop()             #get value for comparison
+        countOps += 1
 
         #inner loop, the main comparison part
         while not sortedStack.isempty():
+            countOps += 1
 
             lowvalue = sortedStack.pop()            #get value 2 for comparison
+            countOps += 1
 
             if (highvalue > lowvalue):              #compare
                 unsortedStack.push(lowvalue)        #if the highvalue was higher push the lowvalue to the unsorted stack
+                countOps += 1
 
             else:
                 sortedStack.push(lowvalue)          #if the highvalue was lower push the lowvalue to the sorted stack
+                countOps += 1
                 break                               #if that was the case we exit the innerloop so we can get a new highvalue
 
         sortedStack.push(highvalue)                 #resets the loop so when it starts again(if it does) we have the same start
+        countOps += 1
 
+    print("this is countops " ,countOps)
     return sortedStack
 
 
@@ -172,19 +184,19 @@ def main():
     start7 = createworststack(5)
     start8 = createworststack(6)
     start9 = createworststack(7)
-    hal1 = sortStackLowestOnTop(start3)
-    hal2 = sortStackLowestOnTop(start4)
-    hal3 = sortStackLowestOnTop(start5)
-    hal4 = sortStackLowestOnTop(start6)
-    hal5 = sortStackLowestOnTop(start7)
-    hal6 = sortStackLowestOnTop(start8)
-    hal7 = sortStackLowestOnTop(start9)
+    hal1 = newsortlowestontop(start3)
+    hal2 = newsortlowestontop(start4)
+    hal3 = newsortlowestontop(start5)
+    hal4 = newsortlowestontop(start6)
+    hal5 = newsortlowestontop(start7)
+    hal6 = newsortlowestontop(start8)
+    hal7 = newsortlowestontop(start9)
     starttime1 = time.time()
-    result1 = sortStackLowestOnTop(start1)
+    result1 = newsortlowestontop(start1)
     endtime1 = time.time()
     runtime1 = endtime1 - starttime1
     starttime2 = time.time()
-    result2 = sortStackLowestOnTop(start2)
+    result2 = newsortlowestontop(start2)
     endtime2 = time.time()
     runtime2 = endtime2 - starttime2
     #for i in range(0,1000):
