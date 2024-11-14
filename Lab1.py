@@ -175,34 +175,47 @@ def newsortlowestontop(stack):
 
 
 def main():
-    start1 = createworststack(1000)
-    start2 = createworststack(2000)
-    start3 = createworststack(1)
-    start4 = createworststack(2)
-    start5 = createworststack(3)
-    start6 = createworststack(4)
-    start7 = createworststack(5)
-    start8 = createworststack(6)
-    start9 = createworststack(7)
-    hal1 = newsortlowestontop(start3)
-    hal2 = newsortlowestontop(start4)
-    hal3 = newsortlowestontop(start5)
-    hal4 = newsortlowestontop(start6)
-    hal5 = newsortlowestontop(start7)
-    hal6 = newsortlowestontop(start8)
-    hal7 = newsortlowestontop(start9)
-    starttime1 = time.time()
-    result1 = newsortlowestontop(start1)
-    endtime1 = time.time()
-    runtime1 = endtime1 - starttime1
-    starttime2 = time.time()
-    result2 = newsortlowestontop(start2)
-    endtime2 = time.time()
-    runtime2 = endtime2 - starttime2
+    # start1 = createworststack(100)
+    # start2 = createworststack(200)
+    # start3 = createworststack(500)
+    # start4 = createworststack(1000)
+    # start5 = createworststack(2000)
+    # start6 = createworststack(4)
+    # start7 = createworststack(5)
+    # start8 = createworststack(6)
+    # start9 = createworststack(7)
+    # hal1 = newsortlowestontop(start3)
+    # hal2 = newsortlowestontop(start4)
+    # hal3 = newsortlowestontop(start5)
+    # hal4 = newsortlowestontop(start6)
+    # hal5 = newsortlowestontop(start7)
+    # hal6 = newsortlowestontop(start8)
+    # hal7 = newsortlowestontop(start9)
+    # starttime1 = time.time()
+    # result1 = newsortlowestontop(start1)
+    # endtime1 = time.time()
+    # runtime1 = endtime1 - starttime1
+    # starttime2 = time.time()
+    # result2 = newsortlowestontop(start2)
+    # endtime2 = time.time()
+    # runtime2 = endtime2 - starttime2
+
+    start1 = createworststack(100)
+    start2 = createworststack(200)
+    start3 = createworststack(500)
+    start4 = createworststack(1000)
+    start5 = createworststack(2000)
+
+    hal1 = newsortlowestontop(start1)
+    hal2 = newsortlowestontop(start2)
+    hal3 = newsortlowestontop(start3)
+    hal4 = newsortlowestontop(start4)
+    hal5 = newsortlowestontop(start5)
+
     #for i in range(0,1000):
     #    print(result1.pop(), result2.pop())
-    print(runtime1)
-    print(runtime2)
+    # print(runtime1)
+    # print(runtime2)
 
 
 
