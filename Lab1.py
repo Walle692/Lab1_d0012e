@@ -75,22 +75,26 @@ def sortStackLowestOnTop(stack):
     #giving reasonable names and initializeing empty stack to sort to
     unsortedStack = stack
     sortedStack = Stack()
-
+    countops = 0
     #checking if the unsortedstack is empty
     #if the stack is empty it returns an empty stack
     if not stack.isempty():
         highValue = stack.pop()                     #if the stack has elements get a highvalue
         if not stack.isempty():                     #check if stack is empty again if not gets a lowvalue
             lowValue = stack.pop()
+            countops += 5
         else:
             sortedStack.push(highValue)             #if there was only one value, return sortedStack with that value
+            countops +=5
             return sortedStack
     else:
+        countops += 1
         return sortedStack
 
 
     #main loop, runs according to conditions
     while  (unsortedStack.isempty() is False) and (lowValue is not None) and (highValue is not None):
+        countops += 1
 
         #inner loop, the main comparison part
         while (highValue is not None) and (lowValue is not None) and (highValue >= lowValue):             #if highValue is greater than bottom then
@@ -98,33 +102,41 @@ def sortStackLowestOnTop(stack):
             highValue = lowValue                    #the old lowValue is now high value
             if not unsortedStack.isempty():         #check if we actually can get a new value
                 lowValue = unsortedStack.pop()      #get new value
+                countops += 4
             else:
+                countops += 3
                 lowValue = None                     #importand to close loop
 
         if sortedStack.isempty():                   #this is for when the sorted stack is empty
             unsortedStack.push(highValue)           #basically swithces position of high and lowvalue
             highValue = lowValue
+            countops += 2
             if not unsortedStack.isempty():         #check if we actually can get a new value
                 lowValue = unsortedStack.pop()
+                countops += 2
             else:
+                countops += 1
                 lowValue = None                     #importand to close loop
 
         else:                                       #if the sortedstack has elements this runs instead
             unsortedStack.push(highValue)           #push the highvalue to unsorted
             if not sortedStack.isempty():
                 highValue = sortedStack.pop()       #gets a new highvalue
+                countops += 3
             if lowValue is None and unsortedStack.isempty() is False:
                 lowValue = unsortedStack.pop()      #this part is for the case when the unsorted stack has elements
-                                                    #this makes sure that we have both high and lowvalue, when this runs it means that we've
+                countops += 2                       #this makes sure that we have both high and lowvalue, when this runs it means that we've
                                                     #come to the end of sorting, and the outerloop will close
 
 
     if highValue is not None:                       #here we add the last elements to the stack.
         sortedStack.push(highValue)
+        countops += 1
     if lowValue is not None:
         sortedStack.push(lowValue)
+        countops += 1
 
-
+    print("this is countops " ,countops)
     return sortedStack
 
 def newsortlowestontop(stack):
@@ -154,18 +166,32 @@ def newsortlowestontop(stack):
 
 
 def main():
-    start1 = createworststack(20000)
-    start2 = createworststack(20000)
+    start1 = createworststack(1000)
+    start2 = createworststack(2000)
+    start3 = createworststack(1)
+    start4 = createworststack(2)
+    start5 = createworststack(3)
+    start6 = createworststack(4)
+    start7 = createworststack(5)
+    start8 = createworststack(6)
+    start9 = createworststack(7)
+    hal1 = sortStackLowestOnTop(start3)
+    hal2 = sortStackLowestOnTop(start4)
+    hal3 = sortStackLowestOnTop(start5)
+    hal4 = sortStackLowestOnTop(start6)
+    hal5 = sortStackLowestOnTop(start7)
+    hal6 = sortStackLowestOnTop(start8)
+    hal7 = sortStackLowestOnTop(start9)
     starttime1 = time.time()
-    result1 = newsortlowestontop(start1)
+    result1 = sortStackLowestOnTop(start1)
     endtime1 = time.time()
     runtime1 = endtime1 - starttime1
     starttime2 = time.time()
     result2 = sortStackLowestOnTop(start2)
     endtime2 = time.time()
     runtime2 = endtime2 - starttime2
-    for i in range(0,1000):
-        print(result1.pop(), result2.pop())
+    #for i in range(0,1000):
+    #    print(result1.pop(), result2.pop())
     print(runtime1)
     print(runtime2)
 
